@@ -17,7 +17,7 @@ void start_game_loop(int finish_number)
     Player p1("P1");
     Player p2("P2");
 
-    while(is_won = false)
+    while(!is_won)
     {
         fmt::print(fmt::fg(fmt::color::purple), "The game is on! The finish number is {}\n\n", finish_number);
 
