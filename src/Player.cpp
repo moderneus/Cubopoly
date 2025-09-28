@@ -3,6 +3,7 @@
 Player::Player(std::string username)
 {
     _username = username;
+    _score = 0;
 }
 
 std::string& Player::get_input()

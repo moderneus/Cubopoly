@@ -8,7 +8,7 @@
 
 using Command = std::function<void(Player&)>;
 
-std::unordered_map<int, std::function<void()>> get_menu_commands();
+std::unordered_map<std::string, std::function<void()>> get_menu_commands();
 
 std::unordered_map<std::string, Command> get_play_commands();
 

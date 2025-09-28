@@ -18,3 +18,4 @@ add_executable(Cubopoly
 
 target_include_directories(Cubopoly PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/headers)
 target_link_libraries(Cubopoly PRIVATE fmt::fmt)
+target_compile_options(Cubopoly PRIVATE -g)
