@@ -2,13 +2,23 @@
 
 Player::Player(std::string username)
 {
-    _username = username;
+    _username = username;  
     _score = 0;
 }
 
 std::string& Player::get_input()
 {
     return _input;
+}
+
+Player* Player::get_enemy()
+{
+    return _enemy;
+}
+
+void Player::set_enemy(Player& enemy)
+{
+    _enemy = &enemy;
 }
 
 int Player::get_score()

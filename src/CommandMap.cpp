@@ -42,12 +42,10 @@ std::unordered_map<std::string, std::function<void(Player&)>> get_play_commands(
 
         {GAME::SCORE, [](Player& player)
         {
-            fmt::print(fmt::fg(fmt::color::purple), "The {} player's score: {}\n\n", player.get_username(), player.get_score());
+            Player* enemy = player.get_enemy();
+
+            fmt::print(fmt::fg(fmt::color::cyan), "The {}'s score: {}\n", player.get_username(), player.get_score());
+            fmt::print(fmt::fg(fmt::color::cyan), "The {}'s score: {}\n\n", enemy->get_username(), enemy->get_score());
         }},
-
-        // {GAME::QUIT, []()
-        // {
-
-        // }},
     };
 }

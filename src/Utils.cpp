@@ -27,7 +27,8 @@ void execute_command(Player& player)
         {
             it->second(player);
 
-            is_executed = true;
+            if(player.get_input() == GAME::THROW)
+                is_executed = true;
         }
             
         else

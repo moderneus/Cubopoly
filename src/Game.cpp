@@ -15,6 +15,9 @@ void start_game_loop()
     Player p1("P1");
     Player p2("P2");
 
+    p1.set_enemy(p2);
+    p2.set_enemy(p1);
+
     fmt::print(fmt::fg(fmt::color::purple), "The game is on! The finish number is {}\n\n", GAME::FINISH_NUMBER);
 
     while(true)
