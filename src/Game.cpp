@@ -1,5 +1,6 @@
 #include "Game.hpp"
 #include "CommandMap.hpp"
+#include "Options.hpp"
 #include "Player.hpp"
 #include "Utils.hpp"
 #include "Constants.hpp"
@@ -12,24 +13,24 @@
 
 void start_game_loop()
 {
-    Player p1("P1");
-    Player p2("P2");
+    Player p1(OPTIONS::P1_username);
+    Player p2(OPTIONS::P2_username);
 
     p1.set_enemy(p2);
     p2.set_enemy(p1);
 
-    fmt::print(fmt::fg(fmt::color::purple), "The game is on! The finish number is {}\n\n", GAME::FINISH_NUMBER);
+    fmt::print(fmt::fg(fmt::color::purple), "The game is on! The finish number is {}\n\n", OPTIONS::FINISH_NUMBER);
 
     while(true)
     {
-        execute_command(p1);
+        execute_command(get_play_commands(), p1);
 
-        if(is_win(p1))
+        if(is_win(p1) || p1.get_input() == GAME::QUIT)
             return;
         
-        execute_command(p2);
+        execute_command(get_play_commands(), p2);
 
-        if(is_win(p2))
+        if(is_win(p1) || p1.get_input() == GAME::QUIT)
             return;
     }
 }

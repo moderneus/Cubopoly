@@ -1,6 +1,7 @@
 #include "Utils.hpp"
 #include "CommandMap.hpp"
 #include "Constants.hpp"
+#include "Options.hpp"
 
 #include <fmt/core.h>
 #include <fmt/color.h>
@@ -9,13 +10,38 @@
 #include <sstream>
 #include <iostream>
 
-void execute_command(Player& player)
+void execute_command(std::unordered_map<std::string, std::function<void()>> commands_map, Player& user)
 {
     bool is_executed = false;
 
     while(!is_executed)
     {
-        auto commands = get_play_commands();
+        auto commands = commands_map;
+
+        std::cin >> user.get_input();
+        
+        auto it = commands.find(user.get_input());
+
+        if(it != commands.end())
+        {
+            it->second();
+            is_executed = true;
+        }
+            
+        else
+        {
+            fmt::print(fmt::fg(fmt::color::red), "There is no command: '{}'\n\n", user.get_input());
+        }  
+    }
+}
+
+void execute_command(std::unordered_map<std::string, std::function<void(Player&)>> commands_map, Player& player)
+{
+    bool is_executed = false;
+
+    while(!is_executed)
+    {
+        auto commands = commands_map;
 
         fmt::print(fmt::fg(fmt::color::gold), "{} player's turn: ", player.get_username());
 
@@ -40,7 +66,7 @@ void execute_command(Player& player)
 
 bool is_win(Player& player)
 {
-    if(player.get_score() >= GAME::FINISH_NUMBER)
+    if(player.get_score() >= OPTIONS::FINISH_NUMBER)
     {
         fmt::print(fmt::fg(fmt::color::purple), "The {} wins!!!\n\n\a", player.get_username());
 
@@ -53,7 +79,7 @@ bool is_win(Player& player)
     }
 }
 
-bool is_number(std::string& user_input)
+bool is_number(const std::string& user_input)
 {
     std::istringstream ss(user_input);
 
@@ -88,7 +114,7 @@ void print_start_menu()
     (
         fmt::fg(fmt::color::white_smoke), 
         "1. Play!\n"
-        "2. Settings.\n" //NOT WORKING YET
+        "2. Options.\n"
         "3. Exit.\n\n"
     );
 }

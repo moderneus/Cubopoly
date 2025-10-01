@@ -1,5 +1,6 @@
 #include "CommandMap.hpp"
 #include "Constants.hpp"
+#include "Options.hpp"
 #include "Player.hpp"
 #include "Game.hpp"
 
@@ -16,6 +17,11 @@ std::unordered_map<std::string, std::function<void()>> get_menu_commands()
         {UI::MENU::PLAY, []()
         {
             start_game_loop();
+        }},
+
+        {UI::MENU::OPTIONS, []()
+        {
+            open_options();
         }},
 
         {UI::MENU::EXIT, []()
