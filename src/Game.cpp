@@ -30,7 +30,7 @@ void start_game_loop()
         
         execute_command(get_play_commands(), p2);
 
-        if(is_win(p1))
+        if(is_win(p2))
             return;
     }
 }
