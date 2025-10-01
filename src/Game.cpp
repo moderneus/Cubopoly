@@ -25,12 +25,12 @@ void start_game_loop()
     {
         execute_command(get_play_commands(), p1);
 
-        if(is_win(p1) || p1.get_input() == GAME::QUIT)
+        if(is_win(p1))
             return;
         
         execute_command(get_play_commands(), p2);
 
-        if(is_win(p1) || p1.get_input() == GAME::QUIT)
+        if(is_win(p1))
             return;
     }
 }

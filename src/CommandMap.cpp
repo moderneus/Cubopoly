@@ -53,5 +53,17 @@ std::unordered_map<std::string, std::function<void(Player&)>> get_play_commands(
             fmt::print(fmt::fg(fmt::color::cyan), "The {}'s score: {}\n", player.get_username(), player.get_score());
             fmt::print(fmt::fg(fmt::color::cyan), "The {}'s score: {}\n\n", enemy->get_username(), enemy->get_score());
         }},
+
+        {GAME::QUIT, [](Player& player)
+        {
+            fmt::print(fmt::fg(fmt::color::purple), "The {} has been quit.\n\n", player.get_username());
+
+            Player* enemy = player.get_enemy();
+
+            fmt::print(fmt::fg(fmt::color::cyan), "The {}'s score: {}\n", player.get_username(), player.get_score());
+            fmt::print(fmt::fg(fmt::color::cyan), "The {}'s score: {}\n\n", enemy->get_username(), enemy->get_score());
+
+            std::exit(EXIT_SUCCESS);
+        }},
     };
 }
