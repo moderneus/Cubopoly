@@ -10,6 +10,7 @@ add_executable(Cubopoly
         
     src/Cubopoly.cpp
     src/CommandMap.cpp
+    src/Dice.cpp
     src/Options.cpp
     src/Game.cpp
     src/Player.cpp

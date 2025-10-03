@@ -9,8 +9,6 @@
 
 int main()
 {
-    srand(time(NULL));
-
     while(true)
     {
         print_start_menu();

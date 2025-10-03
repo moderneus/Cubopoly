@@ -3,9 +3,7 @@
 #include "Options.hpp"
 #include "Player.hpp"
 #include "Game.hpp"
-
-#include <stdlib.h>
-#include <ctime>
+#include "Dice.hpp"
 
 #include <fmt/core.h>
 #include <fmt/color.h>
@@ -33,11 +31,13 @@ std::unordered_map<std::string, std::function<void()>> get_menu_commands()
 
 std::unordered_map<std::string, std::function<void(Player&)>> get_play_commands()
 {
+    Dice dice;
+
     return
     {
-        {GAME::THROW, [](Player& player)
+        {GAME::THROW, [&dice](Player& player)
         {   
-            int number = (rand() % 6) + 1;
+            int number = dice.roll();
 
             fmt::print(fmt::fg(fmt::color::lime_green), "The number {} came up!\n", number);
             
