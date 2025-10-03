@@ -3,6 +3,9 @@
 #include <sstream>
 #include <string>
 
+#include <unordered_map>
+#include <functional>
+
 class Player
 {
 private:
@@ -12,7 +15,13 @@ private:
     int _score;
 
 public:
+    void execute_command(std::unordered_map<std::string, std::function<void(Player&)>> commands_map, Player& player);
+
+    void execute_command(std::unordered_map<std::string, std::function<void()>> commands_map, Player& user);
+
     Player(std::string username);
+
+    Player();
 
     std::string& get_input();
 

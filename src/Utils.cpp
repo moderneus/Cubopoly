@@ -1,6 +1,4 @@
 #include "Utils.hpp"
-#include "CommandMap.hpp"
-#include "Constants.hpp"
 #include "Options.hpp"
 
 #include <fmt/core.h>
@@ -8,61 +6,6 @@
 
 #include <string>
 #include <sstream>
-#include <iostream>
-
-void execute_command(std::unordered_map<std::string, std::function<void()>> commands_map, Player& user)
-{
-    bool is_executed = false;
-
-    while(!is_executed)
-    {
-        auto commands = commands_map;
-
-        std::cin >> user.get_input();
-        
-        auto it = commands.find(user.get_input());
-
-        if(it != commands.end())
-        {
-            it->second();
-            is_executed = true;
-        }
-            
-        else
-        {
-            fmt::print(fmt::fg(fmt::color::red), "There is no command: '{}'\n\n", user.get_input());
-        }  
-    }
-}
-
-void execute_command(std::unordered_map<std::string, std::function<void(Player&)>> commands_map, Player& player)
-{
-    bool is_executed = false;
-
-    while(!is_executed)
-    {
-        auto commands = commands_map;
-
-        fmt::print(fmt::fg(fmt::color::gold), "{} player's turn: ", player.get_username());
-
-        std::cin >> player.get_input();
-        
-        auto it = commands.find(player.get_input());
-
-        if(it != commands.end())
-        {
-            it->second(player);
-
-            if(player.get_input() == GAME::THROW)
-                is_executed = true;
-        }
-            
-        else
-        {
-            fmt::print(fmt::fg(fmt::color::red), "There is no command: '{}'\n\n", player.get_input());
-        }  
-    }
-}
 
 bool is_win(Player& player)
 {
@@ -79,9 +22,9 @@ bool is_win(Player& player)
     }
 }
 
-bool is_number(const std::string& user_input)
+bool is_number(const std::string& str)
 {
-    std::istringstream ss(user_input);
+    std::istringstream ss(str);
 
     int x;
     if(!(ss >> x))
@@ -93,20 +36,6 @@ bool is_number(const std::string& user_input)
 
     return true;
 }
-
-void request_input(std::string& user_input)
-{
-    while(!is_number(user_input))
-    {
-        fmt::print(fmt::fg(fmt::color::gold), "Choice: ");
-
-        std::cin >> user_input;
-
-        if(!is_number(user_input))
-            fmt::print(fmt::fg(fmt::color::red), "Enter the number, please.\n\n");
-    }
-}
-
 
 void print_start_menu()
 {
